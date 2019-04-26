@@ -1,0 +1,187 @@
+<html>
+<head>
+	<style>
+	body{
+		background-size: 100%;
+	}
+	@media screen and (orientation:landscape){
+	div{
+		display: inline-block;
+		width: 40vw;
+		height: 40vw;
+		margin: 4vw;
+		background-color: silver;
+		box-shadow: 10px 10px black;
+		border-radius: 10%;
+
+	}
+	p{
+		height: auto;
+		text-align: center;
+		font-size: 100%;
+		padding: 0%;
+	}
+	}
+@media screen and (orientation:portrait){
+	div{
+		display: inline-block;
+		width: 92vw;
+		height: 92vw;
+		margin: 4vw;
+		background-color: grey;
+		box-shadow: 10px 10px black;
+		border-radius: 10%;
+	}
+		p{
+		height: 7%;
+		text-align: center;
+		font-size: 300%;
+		padding: 0%;
+	}
+}
+a{
+		width: 100%;
+		height: 100%;
+	}
+	
+	img{
+		width: 100%;
+		height: 90%;
+		border-radius: 10%;
+	}
+	div:hover{
+		box-shadow: 20px 20px grey;
+		background-color: orange;
+	}
+	input{
+		height: 5%;
+		width: 5%;
+		}
+	span{
+		height: 5%;
+		display: inline-block;
+		text-align: center;
+	}
+</style>
+	</head>
+<body id="bodi">
+	<label class="selector">
+		<input type="radio" name="rating" onclick="sorter('rat')"><span> :Rating</span>
+		<input type="radio" name="rating" onclick="sorter('tre')"><span> :Trending</span>
+	</label>
+	<br>
+</body>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+	 $(document).ready(function() {
+	 	$.ajax({
+	 		url:"http://192.168.43.180:5000/getlink",
+	 		success:function(r){
+	 			$.ajax({
+	 				url:r,
+	 				success:function(r){
+	 					var xs=document.getElementById("bodi")
+	 					var res=JSON.parse(r.toString())
+	 					if(res.count!=0){
+	 						for(var i=0;i<res.count;i++){
+	 							var boxdiv=document.createElement("div")
+	 							var box=document.createElement("a")
+	 							box.setAttribute('href',res.recipes[i].source_url)
+	 							box.setAttribute('class','itemdetect')
+	 							var tit=document.createElement("p")
+	 							var desc=document.createTextNode(res.recipes[i].title)
+	 							tit.appendChild(desc)
+	 							var imgs=document.createElement("img")
+	 							imgs.setAttribute('src',res.recipes[i].image_url)
+	 							box.appendChild(tit)
+	 							box.appendChild(imgs)
+	 							boxdiv.appendChild(box)
+	 							xs.appendChild(boxdiv)
+	 						}
+	 					}else{
+	 						var boxdiv=document.createElement("div")
+	 							var tit=document.createElement("p")
+	 							var desc=document.createTextNode("no result found :( try with other ingredients or reduce no of images")
+	 							tit.appendChild(desc)
+	 							boxdiv.appendChild(tit)
+	 							xs.appendChild(boxdiv)
+	 					}
+	 				}
+	 			})
+	 			window.sorter=function(abc){
+	 				$("div").remove()
+	 				if(abc=="rat"){
+	 					$.ajax({
+	 				url:r+"&sort=r",
+	 				success:function(r){
+	 					var xs=document.getElementById("bodi")
+	 					var res=JSON.parse(r.toString())
+	 					if(res.count!=0){
+	 						for(var i=0;i<res.count;i++){
+	 							var boxdiv=document.createElement("div")
+	 							var box=document.createElement("a")
+	 							box.setAttribute('href',res.recipes[i].source_url)
+	 							box.setAttribute('class','itemdetect')
+	 							var tit=document.createElement("p")
+	 							var desc=document.createTextNode(res.recipes[i].title)
+	 							tit.appendChild(desc)
+	 							var imgs=document.createElement("img")
+	 							imgs.setAttribute('src',res.recipes[i].image_url)
+	 							box.appendChild(tit)
+	 							box.appendChild(imgs)
+	 							boxdiv.appendChild(box)
+	 							xs.appendChild(boxdiv)
+	 						}
+	 					}else{
+	 						var boxdiv=document.createElement("div")
+	 							var tit=document.createElement("p")
+	 							var desc=document.createTextNode("no result found :( try with other ingredients or reduce no of images")
+	 							tit.appendChild(desc)
+	 							boxdiv.appendChild(tit)
+	 							xs.appendChild(boxdiv)
+	 					}
+	 				}
+	 			})
+	 				}else{
+	 					if(abc=="tre"){
+	 					$.ajax({
+	 				url:r+"&sort=t",
+	 				success:function(r){
+	 					var xs=document.getElementById("bodi")
+	 					var res=JSON.parse(r.toString())
+	 					if(res.count!=0){
+	 						for(var i=0;i<res.count;i++){
+	 							var boxdiv=document.createElement("div")
+	 							var box=document.createElement("a")
+	 							box.setAttribute('href',res.recipes[i].source_url)
+	 							box.setAttribute('class','itemdetect')
+	 							var tit=document.createElement("p")
+	 							var desc=document.createTextNode(res.recipes[i].title)
+	 							tit.appendChild(desc)
+	 							var imgs=document.createElement("img")
+	 							imgs.setAttribute('src',res.recipes[i].image_url)
+	 							box.appendChild(tit)
+	 							box.appendChild(imgs)
+	 							boxdiv.appendChild(box)
+	 							xs.appendChild(boxdiv)
+	 						}
+	 					}else{
+	 						var boxdiv=document.createElement("div")
+	 							var tit=document.createElement("p")
+	 							var desc=document.createTextNode("none of the dish is currentlt trending please select rating button to see other results")
+	 							tit.appendChild(desc)
+	 							boxdiv.appendChild(tit)
+	 							xs.appendChild(boxdiv)
+	 					}
+	 				}
+	 			})
+	 				}
+	 				}
+	 			}
+	 		},
+	 		error:function(xhr,status,error){
+	 		}
+	 		});
+	 });
+</script>
+</html>

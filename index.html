@@ -1,0 +1,96 @@
+<html>
+<head>
+	<style>
+	body{
+		background:url("image.jpg");
+		background-size: 100%;
+	}
+	#abcd{
+		width:0vw;
+		height: 0vh;
+	}
+	label{
+		color: blue;
+	}
+	@media screen and (orientation: landscape){
+	#btns{
+		background-color: blue;
+		color: white;
+		width: 20vw;
+		margin-left: 40vw;
+	}
+	#subbtn{
+		background-color: blue;
+		width: 10vw	
+	}
+		form{
+			width: 100%;
+			text-align: center;
+			height: 100%;
+			padding-top: 40vh;
+		}
+		#lists{
+		width: 60vw;
+		margin-left: 10vw;
+		height: 4vh;
+		text-align: center;
+		border: solid black;
+		background-color: silver;
+	}
+	}
+	@media screen and (orientation:portrait){
+		#btns{
+		background-color: blue;
+		color: white;
+		width: 60vw;
+		margin-left: 20vw;
+		height: 4vh;
+		text-align: center;
+		font-size: 150%;
+	}
+	#subbtn{
+		background-color: blue;
+		width: 20vw;
+		color: white;
+		height: 05vh;
+		font-size: 180%;	
+	}
+		form{
+			width: 100%;
+			text-align: center;
+			height: 100%;
+			padding-top: 40vh;
+		}
+		#lists{
+		width: 60vw;
+		margin-left: 20vw;
+		height: 4vh;
+		text-align: center;
+		border: solid black;
+		background-color: silver;
+	}
+	}
+</style>
+</head>
+<body>
+<form method="post" action="http://192.168.43.180:5000/getrun" enctype="multipart/form-data">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/ratchet/2.0.2/css/ratchet.css" rel="stylesheet"/>
+	<input type="text" maxlength="100" name="lists" id="lists" placeholder="Item list seperated by comma">
+	<label for="abcd" class="btn btn-primary btn-block btn-outlined" id="btns">Select Ingredients Images</label>
+	<input type="file" id="abcd" name="abc" class="abc" accept="image/*" multiple onchange="caller()">
+	<br>
+	<input type="submit" class="btn" name="submit" id="subbtn" value="get recipes">
+</form>
+</body>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+	caller=function(){
+		var x=document.getElementById("abcd").value;
+		if(x){
+		$("#btns").css('background-color','green');
+		var y=document.getElementById("abcd").files;
+		alert(y.length);
+	}
+	}
+</script>
+</html>
