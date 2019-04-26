@@ -1,0 +1,50 @@
+<html>
+<head>
+	<style>
+	body{
+		background:url("image.jpg");
+		background-repeat: no-repeat;
+		background-size: 100%;
+	}
+	#abcd{
+		width:0vw;
+		height: 0vh;
+	}
+	label{
+		color: blue;
+	}
+	#btns{
+		background-color: blue;
+		color: white;
+		width: 20vw;
+		margin-left: 40vw;
+	}
+	#subbtn{
+		background-color: blue;
+		width: 10vw	}
+		form{
+			width: 100%;
+			text-align: center;
+			height: 100%;
+			padding-top: 40vh;
+		}
+</style>
+</head>
+<body>
+<form method="POST" action="getthis.php" enctype="multipart/form-data">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/ratchet/2.0.2/css/ratchet.css" rel="stylesheet"/>
+	<label for="abcd" class="btn btn-primary btn-block btn-outlined" id="btns">Select Images</label>
+	<input type="file" id="abcd" name="abc[]" class="abc" accept="image/*" multiple="multiple" value="click" onchange="caller()">
+	<input type="submit" class="btn" name="submit" id="subbtn">
+</form>
+</body>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+	caller=function(){
+		var x=document.getElementById("abcd").value;
+		if(x){
+		$("#btns").css('background-color','green');
+	}
+	}
+</script>
+</html>
